@@ -1,24 +1,42 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Home from "./components/Home";
+import {useEffect, useState} from "react";
+import Login from "./components/Login";
+import axios from "axios";
 function App() {
+  const [login, setLogin] = useState(false);
+  const checker = async () => {
+    if( sessionStorage.getItem("token") ){
+      console.log("ues isr i ehziouhds")
+      await setLogin(true)
+      const authAxios = axios.create({
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`
+        }
+      })
+    } else {
+      await setLogin(false)
+    }
+    console.log(login);
+  }
+
+
+
+  useEffect(()=>{
+
+    window.addEventListener('storage', () => {
+      checker();
+    })
+    checker();
+    //window.location.reload(false);
+  }, []);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div>
+        {login ?(<Home/>) : (<Login/>)}
+      </div>
   );
 }
 
