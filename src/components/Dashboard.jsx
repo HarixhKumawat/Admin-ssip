@@ -4,6 +4,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import {useEffect, useState} from "react";
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+
 const Dashboard = () => {
 
     const [suggestion, setSuggestion] = useState([]);
@@ -20,6 +22,18 @@ const Dashboard = () => {
             </div>
         )
     }
+
+    const renderLineChart = (data) => {
+        return (
+            <LineChart width={600} height={400} data={data} margin={{top: 5, right: 20, bottom: 5, left: 0}}>
+                <Line type="monotone" dataKey="uv" stroke="#8884d8"/>
+                <CartesianGrid stroke="#ccc" strokeDasharray="5 5"/>
+                <XAxis dataKey="name"/>
+                <YAxis/>
+                <Tooltip/>
+            </LineChart>
+        )
+    };
 
     return (
         <div className="grid grid-cols-3 grid-rows-4 gap-4 mr-2">
@@ -38,7 +52,11 @@ const Dashboard = () => {
                         modules={[Pagination, Navigation]}
                         className="mySwiper"
                     >
-                        <SwiperSlide>{Graphs("https://images.pexels.com/photos/50577/hedgehog-animal-baby-cute-50577.jpeg?cs=srgb&dl=pexels-pixabay-50577.jpg&fm=jpg")}</SwiperSlide>
+                        <SwiperSlide>
+                            <div  className={"flex pl-4 pb-6 h-full h-5/6 items-center justify-center shadow-[20px_-10px_30px_20px_#F0E68C]"}>
+                                {renderLineChart([{name: 'Page A', uv: 400, pv: 2400, amt: 2400}])}
+                            </div>
+                        </SwiperSlide>
                         <SwiperSlide>{Graphs("https://images.pexels.com/photos/735423/pexels-photo-735423.jpeg?cs=srgb&dl=pexels-eftodii-aurelia-735423.jpg&fm=jpg")}</SwiperSlide>
                         <SwiperSlide>{Graphs("https://www.rd.com/wp-content/uploads/2021/04/GettyImages-1145794687.jpg")}</SwiperSlide>
                         <SwiperSlide>{Graphs("https://images.pexels.com/photos/50577/hedgehog-animal-baby-cute-50577.jpeg?cs=srgb&dl=pexels-pixabay-50577.jpg&fm=jpg")}</SwiperSlide>
@@ -86,25 +104,25 @@ const Dashboard = () => {
                 <div className={"flex pl-8 items-center border-1 h-full p-2 rounded-2xl font-bold shadow-[0_0_90px_30px_#F0E68C]"}>
                     <div className="grid grid-rows-4 grid-flow-col gap-11">
                         <div>
-                            <div className={"text-2xl font-extrabold pb-6 text-[#374f6b]"}>Today's Average: </div>
+                            <div className={"text-2xl font-extrabold pb-6 text-[#374f6b]"}>Today's : </div>
                             <div>Total Feedbacks: </div>
                             <div>Average Response time: </div>
                         </div>
 
                         <div>
-                            <div className={"text-2xl font-extrabold pb-6 text-[#374f6b]"}>This Week's Average: </div>
+                            <div className={"text-2xl font-extrabold pb-6 text-[#374f6b]"}>This Week's : </div>
                             <div>Total Feedbacks: </div>
                             <div>Average Response time: </div>
                         </div>
 
                         <div>
-                            <div className={"text-2xl font-extrabold  pb-6 text-[#374f6b]"}>This Month's Average: </div>
+                            <div className={"text-2xl font-extrabold pb-6 text-[#374f6b]"}>This Month's : </div>
                             <div>Total Feedbacks: </div>
                             <div>Average Response time: </div>
                         </div>
 
                         <div>
-                            <div className={"text-2xl font-extrabold  pb-6 text-[#374f6b]"}>This Year's Average: </div>
+                            <div className={"text-2xl font-extrabold pb-6 text-[#374f6b]"}>This Year's : </div>
                             <div>Total Feedbacks: </div>
                             <div>Average Response time: </div>
                         </div>
@@ -119,7 +137,7 @@ const Dashboard = () => {
             </div>
             <div className={""}>
                 <div className={"flex justify-center items-center border-1 h-full p-2 rounded-2xl font-bold shadow-[0_0_90px_30px_#F0E68C]"}>
-                    four
+
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ import { RiGroupFill, RiQuestionAnswerFill } from "react-icons/ri";
 import { FaHome } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { useNavigate } from 'react-router-dom';
+import {HiChartSquareBar} from "react-icons/hi";
 
 function SideBar() {
     const navigate = useNavigate();
@@ -13,6 +14,7 @@ function SideBar() {
                 <IconContext.Provider value={{ color: "#374f6b", className: "global-class-name" }}>
                     <button onClick={()=>{navigate('/')}} className={"flex text-[2.5vw] hover:text-[2.7vw] rounded-2xl pt-2 pb-2 justify-center ease-in-out duration-100\n" }><FaHome/></button>
                     <button onClick={()=>{navigate('/feedbacks')}} className={"flex text-[2.5vw] hover:text-[2.7vw] rounded-2xl pt-2 pb-2 justify-center ease-in-out duration-100\n" }><RiQuestionAnswerFill/></button>
+                    <button onClick={()=>{navigate('/feedbacks')}} className={"flex text-[3vw] hover:text-[3.2vw] rounded-2xl pt-2 pb-2 justify-center ease-in-out duration-100\n" }><HiChartSquareBar/></button>
                     <button onClick={()=>{navigate('/compare')}} className={"flex text-[2.5vw] hover:text-[2.7vw] rounded-2xl pt-2 pb-2 justify-center ease-in-out duration-100\n" }><RiGroupFill/></button>
                     <button onClick={()=>{navigate('/qrcode')}} className={"flex text-[2.5vw] hover:text-[2.7vw] rounded-2xl pt-2 pb-2 justify-center ease-in-out duration-100\n" }><BiQrScan/></button>
                 </IconContext.Provider>
