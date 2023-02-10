@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import {useEffect, useState} from "react";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import { BarChart, Bar, Cell, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const Dashboard = () => {
 
@@ -25,7 +25,7 @@ const Dashboard = () => {
 
     const renderLineChart = (data) => {
         return (
-            <LineChart width={600} height={400} data={data} margin={{top: 5, right: 20, bottom: 5, left: 0}}>
+            <LineChart width={400} height={250} data={data} margin={{top: 20, right: 20, bottom: 5, left: 0}}>
                 <Line type="monotone" dataKey="uv" stroke="#8884d8"/>
                 <CartesianGrid stroke="#ccc" strokeDasharray="5 5"/>
                 <XAxis dataKey="name"/>
@@ -34,6 +34,24 @@ const Dashboard = () => {
             </LineChart>
         )
     };
+
+    const renderBarChart = (data) => {
+        return <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+                width={400}
+                height={250}
+                data={data}
+                margin={{top: 20, right: 20, bottom: 5, left: 0}}
+            >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="pv" fill="#8884d8" />
+            </BarChart>
+        </ResponsiveContainer>
+    }
 
     return (
         <div className="grid grid-cols-3 grid-rows-4 gap-4 mr-2">
@@ -53,11 +71,56 @@ const Dashboard = () => {
                         className="mySwiper"
                     >
                         <SwiperSlide>
-                            <div  className={"flex pl-4 pb-6 h-full h-5/6 items-center justify-center shadow-[20px_-10px_30px_20px_#F0E68C]"}>
-                                {renderLineChart([{name: 'Page A', uv: 400, pv: 2400, amt: 2400}])}
+                            <div  className={"flex pl-4 pt-6 h-5/6 items-center justify-center shadow-[0px_0px_30px_20px_#374f6b]"}>
+                                {renderLineChart([{name: 'Page A', uv: 400},{name: 'Page B', uv: 600}])}
                             </div>
                         </SwiperSlide>
-                        <SwiperSlide>{Graphs("https://images.pexels.com/photos/735423/pexels-photo-735423.jpeg?cs=srgb&dl=pexels-eftodii-aurelia-735423.jpg&fm=jpg")}</SwiperSlide>
+                        <SwiperSlide>
+                            <div  className={"flex pl-4 pt-6 h-5/6 items-center justify-center shadow-[0px_0px_30px_20px_#374f6b]"}>
+                                {renderBarChart([
+                                    {
+                                        name: 'Page A',
+                                        pv: 2400,
+                                    },
+                                    {
+                                        name: 'Page B',
+                                        uv: 3000,
+                                        pv: 1398,
+                                        amt: 2210,
+                                    },
+                                    {
+                                        name: 'Page C',
+                                        uv: 2000,
+                                        pv: 9800,
+                                        amt: 2290,
+                                    },
+                                    {
+                                        name: 'Page D',
+                                        uv: 2780,
+                                        pv: 3908,
+                                        amt: 2000,
+                                    },
+                                    {
+                                        name: 'Page E',
+                                        uv: 1890,
+                                        pv: 4800,
+                                        amt: 2181,
+                                    },
+                                    {
+                                        name: 'Page F',
+                                        uv: 2390,
+                                        pv: 3800,
+                                        amt: 2500,
+                                    },
+                                    {
+                                        name: 'Page G',
+                                        uv: 3490,
+                                        pv: 4300,
+                                        amt: 2100,
+                                    },
+                                ])}
+                            </div>
+                        </SwiperSlide>
                         <SwiperSlide>{Graphs("https://www.rd.com/wp-content/uploads/2021/04/GettyImages-1145794687.jpg")}</SwiperSlide>
                         <SwiperSlide>{Graphs("https://images.pexels.com/photos/50577/hedgehog-animal-baby-cute-50577.jpeg?cs=srgb&dl=pexels-pixabay-50577.jpg&fm=jpg")}</SwiperSlide>
                         <SwiperSlide>{Graphs("https://images.pexels.com/photos/735423/pexels-photo-735423.jpeg?cs=srgb&dl=pexels-eftodii-aurelia-735423.jpg&fm=jpg")}</SwiperSlide>
