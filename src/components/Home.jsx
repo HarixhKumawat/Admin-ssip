@@ -10,7 +10,7 @@ const Home = () => {
     return (
         <Router>
 
-            <div className={"ml-[5vw] mt-[5vw] mb-[1vw] relative"}>
+            <div className={"ml-[5vw] mt-[5vw] mb-[1vw] relative "}>
                 <Routes>
                     <Route path={"/"} element={<Dashboard/>}></Route>
                     <Route path={"/feedbacks"} element={<Feedbacks/>}></Route>
