@@ -45,37 +45,61 @@ const Login = () => {
     return (
         <div className={"flex h-screen items-center justify-center text-gray-700 text-xl font-bold"}>
             <form className={"mb-20"} >
-                <div className="input-block">
-                    <label htmlFor="Username" className="mb-2 mr-16">E-mail</label>
-                    <input type="text" id="Text" name="Text" placeholder="Username" value={formdata.email} onChange={(event)=>{
+                <div className="mb-6">
+                    <label
+                        className="block text-gray-700 font-medium mb-2"
+                        htmlFor="Username"
+                    >
+                        Email
+                    </label>
+                    <input
+                        className="block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        type="text" id="Text" name="Text" placeholder="Username" value={formdata.email} onChange={(event)=>{
                         setFormdata({...formdata,email:event.target.value})
                     }} autoComplete="off" />
-                    {/*{ errors.Email && touched.Email ? <p className="form-error">{errors.Email}</p> : null }*/}
+                    {/*{ errors.Email && touched.Email ? (<p className="form-error">{errors.Email}</p>) : null }*/}
                 </div>
-                <div className="input-block">
-                    <label htmlFor="password" className="mb-2 mr-6">Password</label>
-                    <input type="password" id="Password" name="Password" placeholder="Password" value={formdata.password} onChange={(event)=>{
+                <div className="mb-6">
+                    <label
+                        className="block text-gray-700 font-medium mb-2"
+                        htmlFor="password"
+                    >
+                        Password
+                    </label>
+                    <input
+                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        type="password" id="Password" name="Password" placeholder="Password" value={formdata.password} onChange={(event)=>{
                         setFormdata({...formdata,password:event.target.value})
                     }} autoComplete="off"/>
                     {/*{ errors.Password && touched.Password ? <p className="form-error">{errors.Password}</p> : null }*/}
                 </div>
                 <div className="">
-                    <div className={"flex w-[10vw] border-2"}>
+                    <div className={"flex fit-w border-2"}>
                         < LoadCanvasTemplate reloadText="⟳" reloadColor="red" />
                     </div>
                     <div  className="input-block">
-                        <input type="text" ref={valueRef} id="captcha" name="captcha" placeholder="Enter the Captcha"  value={formdata.captcha} onChange={(event)=>{
+                        <input
+                            className="block w-full mt-4 px-4 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            type="text" ref={valueRef} id="captcha" name="captcha" placeholder="Enter the Captcha"  value={formdata.captcha} onChange={(event)=>{
                             setFormdata({...formdata,captcha:event.target.value})
                         }} autoComplete="off"/>
                         {/*{ errors.captcha && touched.captcha ? <p className="form-error">{errors.captcha}</p> : null }*/}
                     </div>
                 </div>
-                <div className="modal-button">
-                     <button className="input-button" onClick={ (e) => { Login(e) }}>Submit</button>
+                <div className="flex items-center justify-between modal-button">
+                    <button
+                        className="bg-blue-600 inline-block px-6 py-2.5 mt-6 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
+                        type="submit" onClick={ (e) => { Login(e) }}
+                    >
+                        Login
+                    </button>
                 </div>
             </form>
         </div>
     )
 }
+
+
+
 
 export default Login;

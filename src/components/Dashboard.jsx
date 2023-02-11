@@ -5,12 +5,24 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import {useEffect, useState} from "react";
 import { PieChart, Pie, Sector, BarChart, Bar, Cell, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import Feedbacks from "./Feedbacks";
+import axios from "axios";
 
 const Dashboard = () => {
 
     const [suggestion, setSuggestion] = useState([]);
+    const [data, dataAagaya] = useState([])
 
     useEffect(() => {
+        const dam = async()=>{
+            const pid = sessionStorage.getItem("pid")
+            await axios.get(process.env.REACT_APP_SERVER_URL+`/feedback/overViewDetails/${pid}`).then((e)=>{
+                console.log(e.data[0])
+                dataAagaya(e.data[0])
+                // setSuggestion(e)
+            })
+        }
+        dam()
         setSuggestion(["You should maintain more cleanliness around the police station And call \"PEST CONTROLL\"", "Fans are not working properly, should maintain appliances and electronic devices"])
     }, [])
 
@@ -166,7 +178,6 @@ const Dashboard = () => {
                                     { name: 'Group A', value: 400 },
                                     { name: 'Group B', value: 300 },
                                     { name: 'Group C', value: 300 },
-                                    { name: 'Group D', value: 200 },
                                 ])}
                             </div>
                         </SwiperSlide>
@@ -206,34 +217,34 @@ const Dashboard = () => {
                     <div className="grid grid-rows-4 grid-flow-col gap-11">
                         <div>
                             <div className={"text-2xl font-extrabold pb-6 text-[#374f6b]"}>Today's : </div>
-                            <div>Total Feedbacks: </div>
-                            <div>Average Response time: </div>
+                            <div>Total Feedbacks: {data.todayFe}</div>
+                            <div>Average Response time: 5mins</div>
                         </div>
 
                         <div>
                             <div className={"text-2xl font-extrabold pb-6 text-[#374f6b]"}>This Week's : </div>
-                            <div>Total Feedbacks: </div>
-                            <div>Average Response time: </div>
+                            <div>Total Feedbacks: {data.weekFe}</div>
+                            <div>Average Response time: 30mins</div>
                         </div>
 
                         <div>
                             <div className={"text-2xl font-extrabold pb-6 text-[#374f6b]"}>This Month's : </div>
-                            <div>Total Feedbacks: </div>
-                            <div>Average Response time: </div>
+                            <div>Total Feedbacks: {data.weekFe}</div>
+                            <div>Average Response time: More than 30</div>
                         </div>
 
                         <div>
                             <div className={"text-2xl font-extrabold pb-6 text-[#374f6b]"}>This Year's : </div>
                             <div>Total Feedbacks: </div>
-                            <div>Average Response time: </div>
+                            <div>Average Response time: 10</div>
                         </div>
 
                     </div>
                 </div>
             </div>
             <div className={"col-span-2 row-span-2"}>
-                <div className={"flex justify-center items-center border-1 h-full p-2 rounded-2xl font-bold shadow-lg"}>
-                    three
+                <div className={"flex justify-center overflow-y-scroll h-[40vw] items-center border-1 h-full p-2 rounded-2xl font-bold shadow-lg"}>
+                    {/*<Feedbacks/>*/}
                 </div>
             </div>
             <div className={""}>
