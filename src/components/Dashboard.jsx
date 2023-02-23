@@ -21,8 +21,15 @@ const Dashboard = () => {
                 dataAagaya(e.data[0])
                 // setSuggestion(e)
             })
+            let id = pid
+            await axios.get(process.env.REACT_APP_SERVER_URL+`/feedback/rec/${id}`).then((e)=>{
+                console.log(e.data)
+                // setSuggestion(e)
+            })
         }
-        dam()
+        dam().then(() => {
+            console.log("boom")
+        })
         setSuggestion(["You should maintain more cleanliness around the police station And call \"PEST CONTROLL\"", "Fans are not working properly, should maintain appliances and electronic devices"])
     }, [])
 

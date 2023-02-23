@@ -1,6 +1,9 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
 import {MdOutlineQrCode2} from "react-icons/md";
+import 'react-qr-code';
+import QRCode from "qrcode.react";
+// import QRCode from "react-qr-code";
 
 const QrCOde = () => {
 
@@ -17,7 +20,27 @@ const QrCOde = () => {
     const sendPID = (id)=>{
         let pidUrl = `${process.env.REACT_APP_SERVER_URL}/ps/findPs/${id}`
         console.log(pidUrl)
-        axios.get(pidUrl).then((responce)=>{
+        axios.get(pidUrl).then(async (responce) => {
+            str = responce.data
+            setStr(str);
+            console.log(str)
+            if (value !== "A") {
+                const qrCodeURL = document.getElementById('qrCodeEl').toDataURL("image/png").replace("image/png", "image/octet-stream");
+                console.log(qrCodeURL)
+                let aEl = document.createElement("a");
+                aEl.href = qrCodeURL;
+                aEl.download = "QR_Code.png";
+                document.body.appendChild(aEl);
+                aEl.click();
+                document.body.removeChild(aEl);
+            }
+        }).catch(function (error) {
+            console.log(error);
+        })
+    }
+
+    const sendPID2 = (id)=>{
+        axios.get(`http://localhost:5000/ps/findPs/${id}`).then((responce)=>{
             str = responce.data
             setStr(str);
             console.log(str)
@@ -36,6 +59,7 @@ const QrCOde = () => {
         }).catch(function (error) {
             console.log(error);
         })
+
     }
 
     useEffect(()=>{
@@ -92,6 +116,20 @@ const QrCOde = () => {
 
     return(
         <div>
+            <div>
+                <QRCode
+                    style = {{display : "none"}}
+                    id="qrCodeEl"
+                    size={150}
+                    value={value}
+                />
+                {/*<QRCode*/}
+                {/*    size={256}*/}
+                {/*    style={{ height: "auto", maxWidth: "100%", width: "100%", display : "none"}}*/}
+                {/*    value={str}*/}
+                {/*    viewBox={`0 0 256 256`}*/}
+                {/*/>*/}
+            </div>
             <select onChange={(event)=>{
                 setFormdata({...formdata,Did:event.target.value})
             }}>

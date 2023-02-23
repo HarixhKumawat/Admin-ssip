@@ -100,13 +100,30 @@ const Feedbacks = () => {
                                        <td
                                        class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                                            {fs.class.map((k,i)=>(<div>
-                                           <span
-                                            class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                            <span aria-hidden
-                                                  class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                            <span class="relative text-xs"></span>
-                                            {console.log(typeof k)}
+                                               { (fs.class.includes("negative")) ? (
+                                                   <span
+                                                       className="relative inline-block px-3 py-1 font-semibold text-red-500 leading-tight">
+
+                                               <span aria-hidden
+                                                     className="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span className="relative text-xs "></span>
+                                                       {console.log(typeof (k))}
+
+                                                       {(typeof (k) === 'string') ? (<p>{k}</p>) : ("")}
                                         </span>
+                                               ): (
+                                                   <span
+                                                       className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+
+                                               <span aria-hidden
+                                                     className="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span className="relative text-xs "></span>
+                                                       {console.log(typeof (k))}
+
+                                                       {(typeof (k) === 'string') ? (<p>{k}</p>) : ("")}
+                                        </span>
+                                               )}
+
                                         </div>))}
                                    </td>
                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">CATEGORY</td>
